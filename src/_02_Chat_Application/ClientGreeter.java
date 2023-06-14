@@ -1,6 +1,10 @@
-package _01_Intro_To_Sockets.client;
+package _02_Chat_Application;
 
 import java.net.*;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 import java.io.*;
 
 public class ClientGreeter {
@@ -27,7 +31,9 @@ public class ClientGreeter {
       try {
 		Socket sockObj = new Socket(ip,port);
 		DataOutputStream dataObj = new DataOutputStream(sockObj.getOutputStream());
-		dataObj.writeUTF("hello");
+		Scanner inp = new Scanner(System.in);
+		String input = JOptionPane.showInputDialog("Please enter a message to server: ");
+		dataObj.writeUTF(input);
 		DataInputStream streamObj = new DataInputStream(sockObj.getInputStream());
 		System.out.println(streamObj.readUTF());
 		sockObj.close();
